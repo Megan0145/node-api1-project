@@ -2,15 +2,12 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../state/actionCreators';
 
-export function Home({getUsers,users}){
+export function Home({getUsers,users, deleteUser}){
 
     useEffect(() => {
         getUsers()
-    },[])
+    },[getUsers])
 
-    const deleteUser = (id) => {
-        
-    }
 
     if(!users){
         return <p>Loading...</p>
@@ -23,7 +20,8 @@ export function Home({getUsers,users}){
                     <div key={user.id}>
                         <h3>{user.name}</h3>
                         <p>{user.bio}</p>
-                        <button onClick={deleteUser(user.id)}>Delete User</button>
+                        {console.log(user)}
+                        <button onClick={() => deleteUser(user.id)}>Delete User</button>
                     </div>
                 )
             })}
