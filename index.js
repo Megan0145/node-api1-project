@@ -21,7 +21,8 @@ function deleteUser(req, res) {
         if(!user){
             res.status(404).json({ message: "The user with the specified ID does not exist." })
         } else {
-            res.status(200).json(user)
+            console.log(req.body)
+            res.status(200).json({message: "User deleted", id: id, body: req.body})
         }
     })
     .catch(err => {
