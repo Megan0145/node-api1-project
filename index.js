@@ -7,10 +7,26 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.delete("/api/users/:id", deleteUser)
 app.get("/api/users/:id", getUserById);
 app.post("/api/users", createNewUser);
 app.get("/api/users", getAllUsers);
 app.get("*", handleDefaultRequest);
+
+function deleteUser(req, res) {
+    const { id } = req.params;
+    db.remove(id)
+    .then(user => {
+        if(!user){
+            res.status(404).json({ message: "The user with the specified ID does not exist." })
+        } else {
+            res.status(200).json(user)
+        }
+    })
+    .catch(err => {
+        res.status(500).json({ error: "The user could not be removed" })
+    })
+}
 
 function getUserById(req, res) {
   const { id } = req.params;
