@@ -1,13 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../state/actionCreators';
 
-export function Home({getUsers}){
+export function Home({getUsers,users}){
+
+    useEffect(() => {
+        getUsers()
+    },[])
+
+    const deleteUser = (id) => {
+        
+    }
+
+    if(!users){
+        return <p>Loading...</p>
+    }
     return(
         <div>
-            Home
+            <h1>All Users</h1>
+            {users.map(user => {
+                return(
+                    <div key={user.id}>
+                        <h3>{user.name}</h3>
+                        <p>{user.bio}</p>
+                        <button onClick={deleteUser(user.id)}>Delete User</button>
+                    </div>
+                )
+            })}
         </div>
     )
 }
 
-export default connect(state=>state, actionCreators)(Home)
+const mapStateToProps = state => {
+    return {
+      users: state.users.users
+    };
+  };
+
+export default connect(mapStateToProps, actionCreators)(Home)
