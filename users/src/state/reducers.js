@@ -15,6 +15,8 @@ export function userReducer(state = initState, action) {
           return user.id !== JSON.parse(action.payload);
         })
       };
+      case types.ADD_USER: 
+        return{ users: [...state.users, action.payload]}
     default:
       return state;
   }

@@ -22,3 +22,17 @@ export const deleteUser = (id) => dispatch => {
     })
     .catch(err => console.log(err))
 }
+
+export const addUser = (data) => dispatch => {
+    axios.post('http://localhost:5000/api/users', data)
+    .then(res => {
+        alert('User ' + res.data.name + ' created successfully!')
+        dispatch({
+            type: types.ADD_USER, payload: res.data
+        })
+        window.location.replace('/')
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
