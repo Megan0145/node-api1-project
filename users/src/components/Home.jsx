@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../state/actionCreators';
+import { Link } from 'react-router-dom';
 
 export function Home({getUsers,users, deleteUser}){
 
@@ -22,6 +23,7 @@ export function Home({getUsers,users, deleteUser}){
                         <p>{user.bio}</p>
                         {console.log(user)}
                         <button onClick={() => deleteUser(user.id)}>Delete User</button>
+                        <Link to={`updateuser/${user.id}`}>Update User</Link>
                     </div>
                 )
             })}

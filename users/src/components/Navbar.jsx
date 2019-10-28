@@ -11,12 +11,11 @@ export function Navbar() {
       <nav>
           <Link to='/'>Home</Link>
           <Link to='/adduser'>Add User</Link>
-          <Link to='updateuser'>Update User</Link>
       </nav>
       <main>
           <Route exact path='/' component={Home} />
           <Route exact path='/adduser' component={AddUser} />
-          <Route exact path='/updateuser' component={UpdateUser} />
+          <Route exact path='/updateuser:id' component={UpdateUser} />
       </main>
     </div>
   );
